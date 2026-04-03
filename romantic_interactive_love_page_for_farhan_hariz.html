@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>For Farhan ❤️</title>
+<style>
+body {
+  margin:0;
+  font-family: 'Segoe UI', sans-serif;
+  background: linear-gradient(135deg,#ff9a9e,#fad0c4);
+  text-align:center;
+  color:#fff;
+  overflow-x:hidden;
+}
+.container { padding:20px; }
+h1 { font-size:2.5em; }
+button {
+  padding:10px 20px;
+  border:none;
+  border-radius:20px;
+  background:#fff;
+  color:#ff4b5c;
+  cursor:pointer;
+  margin:10px;
+  font-weight:bold;
+}
+.hidden { display:none; }
+.slider { width:80%; }
+img { width:200px; border-radius:20px; margin:10px; }
+.heart {
+  position:absolute;
+  font-size:20px;
+  animation: float 5s linear infinite;
+}
+@keyframes float {
+  from { transform: translateY(100vh); opacity:1; }
+  to { transform: translateY(-10vh); opacity:0; }
+}
+.gallery {
+  display:flex;
+  justify-content:center;
+  flex-wrap:wrap;
+  gap:20px;
+}
+.gallery img {
+  width:180px;
+  display:block;
+  background:#fff;
+  padding:10px 10px 30px 10px;
+  border-radius:10px;
+  box-shadow:0 10px 20px rgba(0,0,0,0.3);
+  transform:rotate(-3deg);
+  transition:0.3s;
+}
+.gallery img:nth-child(even){ transform:rotate(3deg); }
+.gallery img:hover{
+  transform:scale(1.1) rotate(0deg);
+}
+#bigX {
+  position:fixed;
+  top:0; left:0;
+  width:100%; height:100%;
+  background:rgba(0,0,0,0.8);
+  color:red;
+  font-size:200px;
+  display:none;
+  justify-content:center;
+  align-items:center;
+  z-index:999;
+}
+#typeText {
+  width:80%;
+  margin:auto;
+  min-height:80px;
+  font-size:18px;
+}
+#confetti {
+  position:fixed;
+  top:0; left:0;
+  width:100%; height:100%;
+  pointer-events:none;
+}
+</style>
+</head>
+<body>
+
+<canvas id="confetti"></canvas>
+<div id="bigX">❌</div>
+
+<div class="container" id="passwordPage">
+  <h1>Enter Password 😏</h1>
+  <input type="password" id="passInput" placeholder="hint: something I always say">
+  <br>
+  <button onclick="checkPass()">Unlock ❤️</button>
+  <p id="passMsg"></p>
+</div>
+
+<div class="container hidden" id="mainContent">
+  <h1>Hi Farhan Hariz ❤️</h1>
+  <p>I just want you to know...</p>
+  <button onclick="showLove()">Click me 😏</button>
+
+  <div id="loveSection" class="hidden">
+    <h2>I LOVE YOU SO MUCH 💕</h2>
+    <p>You are my favorite person, my peace, my chaos, my everything 🥺</p>
+
+    <img src="https://i.ibb.co/ksLMf94F/yourimage1.jpg">
+    <img src="https://i.ibb.co/wNczFYBL/yourimage2.jpg">
+
+    <div id="typeText"></div>
+
+    <p>Why do you love me? 🤨</p>
+    <button onclick="tease()">Tell me 😌</button>
+    <div id="teaseText"></div>
+
+    <h3>How much do you love me? 😏</h3>
+    <input type="range" min="0" max="1000" value="0" class="slider" oninput="updateLove(this.value)">
+    <p id="loveValue">0%</p>
+
+    <button onclick="moreLove()">More clicks = more love 💖</button>
+    <p id="clickLove"></p>
+
+    <h3>Memory Gallery 📸</h3>
+    <div class="gallery">
+      <img src="https://i.ibb.co/FkWZqGDL/img1.jpg">
+      <img src="https://i.ibb.co/XrY9PHW7/img2.jpg">
+      <img src="https://i.ibb.co/3ydwS7Dc/img3.jpg">
+      <img src="https://i.ibb.co/9kV8Y81x/img4.jpg">
+      <img src="https://i.ibb.co/Fqcbjhdk/img5.jpg">
+      <img src="https://i.ibb.co/qL0RmJRP/img6.jpg">
+    </div>
+
+    <h3>Prove your love 😏</h3>
+    <button id="holdBtn">Hold me for 612 seconds 💖</button>
+    <p id="holdText">(612 sebab our first date 🥺)</p>
+
+    <h3>Quiz Time 😈</h3>
+    <div id="quiz"></div>
+
+    <h3>Don't click this... 😶</h3>
+    <button onclick="fakeBreakup()">Break up 💔</button>
+    <p id="breakupText"></p>
+
+    <h2>Final Message 💌</h2>
+    <p>I'm lucky to have you sayang, don't ever leave me okay? 🥺❤️</p>
+  </div>
+</div>
+
+<script src="https://www.youtube.com/iframe_api"></script>
+<script>
+let player;
+let hasStarted = false;
+
+function checkPass(){
+  const pass = document.getElementById('passInput').value;
+  if(pass === 'iloveyou'){
+    document.getElementById('passwordPage').classList.add('hidden');
+    document.getElementById('mainContent').classList.remove('hidden');
+    startMusicWithFade(); // Start music immediately on password unlock
+  } else {
+    document.getElementById('passMsg').innerText = 'Wrong password 😤 try again baby';
+  }
+}
+
+function onYouTubeIframeAPIReady() {
+  player = new YT.Player('player', {
+    height: '0',
+    width: '0',
+    videoId: 'sqwm65z-u94',
+    playerVars: { autoplay: 1, loop: 1, playlist: 'sqwm65z-u94', controls: 0, modestbranding: 1, rel: 0 },
+    events: { onReady: onPlayerReady }
+  });
+}
+
+function onPlayerReady(event) {
+  event.target.mute();
+}
+
+function startMusicWithFade() {
+  if (!player || hasStarted) return;
+  hasStarted = true;
+
+  player.unMute();
+  player.setVolume(0);
+  player.playVideo();
+
+  let vol = 0;
+  const fadeInterval = setInterval(() => {
+    if (vol >= 100) clearInterval(fadeInterval);
+    else { vol += 2; player.setVolume(vol); }
+  }, 120);
+}
+
+// Rest of your existing JS functions (showLove, typeMessage, tease, etc.) stay the same
+</script>
+<div id="player" style="width:0;height:0;overflow:hidden"></div>
+</body>
+</html>
